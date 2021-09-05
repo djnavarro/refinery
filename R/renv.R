@@ -115,3 +115,32 @@ renv_restore <- function(dir, collection = "_posts", ...) {
   )
 }
 
+
+#' Create the renv setup
+#'
+#' @param dir The folder in which the article is located
+#' @param collection The collection the article belongs to (default = "_posts")
+#'
+#' @return ??
+#' @export
+#'
+renv_start <- function(dir, collection = "_posts") {
+
+  renv::init(
+    project = renv_path(dir, collection),
+    bare = TRUE,
+    restart = FALSE
+  )
+
+  renv::install(
+    packages = c("renv", "distill", "djnavarro/refinery"),
+    library = refinery:::renv_library(dir, collection)
+  )
+
+  renv::install(
+    project = refinery::post_path(dir, collection),
+    library = refinery:::renv_library(dir, collection)
+  )
+}
+
+
