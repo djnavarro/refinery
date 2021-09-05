@@ -24,5 +24,5 @@ renv_locate <- function(dir, collection = "_posts") {
 #' @return Invisibly returns the renv project directory
 #' @export
 renv_activate <- function(dir, collection = "_posts") {
-  renv::activate(project = refinery_locate(dir, collection))
+  renv::activate(project = renv_locate(dir, collection))
 }
