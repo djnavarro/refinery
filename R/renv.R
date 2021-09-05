@@ -16,6 +16,13 @@ renv_path <- function(dir, collection = "_posts") {
   )
 }
 
+#' Locate a distill article
+#'
+#' @param dir The folder in which the article is located
+#' @param collection The collection the article belongs to (default = "_posts")
+#'
+#' @return Character string with the path
+#' @export
 post_path <- function(dir, collection = "_posts") {
   fs::path(
     rprojroot::find_root("_site.yml"),
@@ -39,13 +46,13 @@ renv_lockfile <- function(dir, collection = "_posts") {
 #'
 #' @param dir The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "_posts")
+#' @param ... Arguments to be passed to renv::use()
 #'
-#' @return Invisibly returns the renv project directory
+#' @return ???
 #' @export
-renv_use <- function(dir, collection = "_posts") {
-  renv::use(lockfile = renv_lockfile(dir, collection))
+renv_use <- function(dir, collection = "_posts", ...) {
+  renv::use(lockfile = renv_lockfile(dir, collection), ...)
 }
-
 
 
 #' Create a snapshot of the R environment for the post
