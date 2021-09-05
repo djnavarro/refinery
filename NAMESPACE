@@ -2,6 +2,7 @@
 
 export(post_path)
 export(record_lockfile)
+export(record_source)
 export(record_timestamp)
 export(renv_library)
 export(renv_load)
