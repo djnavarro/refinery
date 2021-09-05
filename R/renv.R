@@ -163,10 +163,10 @@ renv_initialise <- function(dir, collection = "_posts") {
   )
 
   # analyse the post folder and create lockfile
-  renv_snapshot(dir, collection, prompt = FALSE)
+  renv_snapshot(dir, collection)
 
   # use the lockfile to populate the library
-  renv_restore(dir, collection, prompt = FALSE)
+  renv_restore(dir, collection)
 
 }
 
