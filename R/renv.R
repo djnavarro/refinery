@@ -43,7 +43,7 @@ renv_lockfile <- function(dir, collection = "_posts") {
 #' @return Invisibly returns the renv project directory
 #' @export
 renv_use <- function(dir, collection = "_posts") {
-  renv::uses(lockfile = renv_lockfile(dir, collection))
+  renv::use(lockfile = renv_lockfile(dir, collection))
 }
 
 
