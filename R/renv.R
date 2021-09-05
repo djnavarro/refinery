@@ -136,11 +136,6 @@ renv_start <- function(dir, collection = "_posts") {
     packages = c("renv", "distill", "djnavarro/refinery"),
     library = refinery:::renv_library(dir, collection)
   )
-
-  renv::install(
-    project = refinery::post_path(dir, collection),
-    library = refinery:::renv_library(dir, collection)
-  )
 }
 
 
