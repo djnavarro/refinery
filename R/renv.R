@@ -51,9 +51,16 @@ renv_lockfile <- function(dir, collection = "_posts") {
 #' @return ???
 #' @export
 renv_use <- function(dir, collection = "_posts", ...) {
-  renv::use(lockfile = renv_lockfile(dir, collection), ...)
+  renv::use(
+    lockfile = renv_lockfile(dir, collection),
+    library = renv_library(dir, collection),
+    ...
+  )
 }
 
+renv_library <- function(dir, collection = "_posts") {
+  renv::paths$library(project = renv_path(dir, collection))
+}
 
 #' Create a snapshot of the R environment for the post
 #'
