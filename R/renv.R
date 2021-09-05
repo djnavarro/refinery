@@ -58,9 +58,30 @@ renv_use <- function(dir, collection = "_posts", ...) {
   )
 }
 
+#' Locate the library for the post
+#'
+#' @param dir The folder in which the article is located
+#' @param collection The collection the article belongs to (default = "_posts")
+#'
+#' @return path
+#' @export
 renv_library <- function(dir, collection = "_posts") {
   renv::paths$library(project = renv_path(dir, collection))
 }
+
+
+#' Load the renv library
+#'
+#' @param dir The folder in which the article is located
+#' @param collection The collection the article belongs to (default = "_posts")
+#' @param ... Arguments to be passed to renv::load()
+#'
+#' @return ???
+#' @export
+renv_load <- function(dir, collection = "_posts", ...) {
+  renv::load(project = renv_path(dir, collection), ...)
+}
+
 
 #' Create a snapshot of the R environment for the post
 #'
