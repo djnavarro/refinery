@@ -95,6 +95,7 @@ renv_snapshot <- function(dir, collection = "_posts", ...) {
   renv::snapshot(
     project = post_path(dir, collection),
     lockfile = renv_lockfile(dir, collection),
+    prompt = FALSE,
     ...
   )
 }
@@ -103,14 +104,16 @@ renv_snapshot <- function(dir, collection = "_posts", ...) {
 #'
 #' @param dir The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "_posts")
+#' @param clean Remove packages not recorded in the lockfile? (default = FALSE)
 #' @param ... Arguments to be passed to renv::restore()
 #'
 #' @return ???
 #' @export
-renv_restore <- function(dir, collection = "_posts", ...) {
+renv_restore <- function(dir, collection = "_posts", clean = FALSE, ...) {
   renv::restore(
-    project = post_path(dir, collection),
+    library = renv_library(dir, collection),
     lockfile = renv_lockfile(dir, collection),
+    prompt = FALSE,
     ...
   )
 }
