@@ -17,3 +17,6 @@ Character string with the path
 \description{
 Locate the renv lockfile associated with a distill article
 }
+\details{
+The renv.lock file is stored in the post folder
+}

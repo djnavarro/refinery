@@ -17,3 +17,18 @@ Character string with the path
 \description{
 Locate the renv project environment for a distill article
 }
+\details{
+By default, renv will either create the project library in the same
+folder as the post (if you're using renv::init), or else it will store the
+library in a temporary directory (if you're using renv::use with default
+parameters). The former causes problems with distill because the distill will
+recursively search the renv project library looking for posts, and it does
+sometimes find some! This is undesirable because it can break the blog.
+The latter is a very good default for users who just want to share a
+reproducible script (which was the motivation for renv::use) but it's
+inelegant if you wan to manage the R environments within your blog because
+the libraries aren't included within your blog. To address this, the
+refinery package places the renv.lock file in the post folder but moves the
+renv library into a separate top level "_renv" directory that distill won't
+look at when searching for posts
+}
