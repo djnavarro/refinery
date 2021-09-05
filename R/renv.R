@@ -153,7 +153,7 @@ renv_initialise <- function(dir, collection = "_posts") {
   )
 
   # the renv project library isn't a separate project
-  rproj <- fs::path(renv_path(dir, collection), paste0(dir.))
+  rproj <- fs::path(renv_path(dir, collection), paste0(dir, ".Rproj"))
   fs::file_delete(rproj)
 
   # ensure the minimal set of packages exsits in the library
