@@ -10,7 +10,7 @@ record_source(
   collection = "_posts",
   branch = "master",
   host = "https://github.com",
-  text = "R environment"
+  text = "source code"
 )
 }
 \arguments{

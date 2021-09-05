@@ -47,7 +47,7 @@ record_lockfile <- function(repo_spec, dir, collection = "_posts",
 #' @export
 record_source <- function(repo_spec, dir, collection = "_posts",
                             branch = "master", host = "https://github.com",
-                            text = "R environment") {
+                            text = "source code") {
   path <- paste(
     host, repo_spec, "tree", branch, collection, dir, sep = "/"
   )
