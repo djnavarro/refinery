@@ -125,7 +125,7 @@ insert_netlify_redirect <- function(slug, date, collection = "posts", publish = 
     brio::write_lines(content, redirect_file)
     fs::file_copy(
       path = redirect_file,
-      new_path = paste0(publish, "/", redirect_file),
+      new_path = fs::path(publish, redirect_file),
       overwrite = TRUE
     )
   }
