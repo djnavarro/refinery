@@ -118,6 +118,7 @@ insert_netlify_redirect <- function(slug, date, collection = "posts", publish = 
 
   blogroot <- rprojroot::find_root("_site.yml")
   redirect_file <- fs::path(blogroot, "_redirects")
+  redirect_file_public <- fs::path(blogroot, publish, "_redirects")
 
   content <- brio::read_lines(redirect_file)
   if(!any(content == redirection)) {
@@ -125,7 +126,7 @@ insert_netlify_redirect <- function(slug, date, collection = "posts", publish = 
     brio::write_lines(content, redirect_file)
     fs::file_copy(
       path = redirect_file,
-      new_path = fs::path(publish, redirect_file),
+      new_path = redirect_file_public,
       overwrite = TRUE
     )
   }
