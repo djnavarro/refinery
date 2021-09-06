@@ -1,4 +1,49 @@
 
+#' Inserts the default refinery appendix
+#'
+#' @param dir The folder in which the article is located
+#' @param collection The collection the article belongs to (default = "_posts")
+#' @param repo_spec Repository specification, formatted as "user/repo_name"
+#'
+#' @return A shiny.tag object
+#' @export
+insert_appendix <- function(repo_spec, dir, collection = "_posts") {
+  htmltools::tagList(
+    distill_appendix(
+      name = "Last updated",
+      content = insert_timestamp()
+    ),
+    distill_appendix(
+      name = "Details",
+      content = htmltools::span(
+        insert_source(repo_spec, dir, collection),
+        ", ",
+        insert_lockfile(repo_spec, dir, collection)
+      )
+    )
+  )
+}
+
+
+distill_appendix <- function(name, content) {
+  htmltools::tag(
+    "d-appendix",
+    list(
+      style = "display: grid;",
+      htmltools::h3(
+        id = gsub("[[:space:]]+", "-", tolower(name)),
+        class = "appendix",
+        name
+      ),
+      htmltools::div(
+        class = "l-body",
+        htmltools::p(
+          content
+        )
+      )
+    )
+  )
+}
 
 #' Records a time stamp to the R markdown output
 #'
@@ -6,13 +51,13 @@
 #'
 #' @return A "shiny.tag" object
 #' @export
-record_timestamp <- function(tzone = Sys.timezone()) {
+insert_timestamp <- function(tzone = Sys.timezone()) {
   time <- lubridate::now(tzone = tzone)
   stamp <- as.character(time, tz = tzone, usetz = TRUE)
   return(htmltools::span(stamp))
 }
 
-#' Records a link to the lock file
+#' Inserts a link to the lock file
 #'
 #' @param dir The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "_posts")
@@ -23,7 +68,7 @@ record_timestamp <- function(tzone = Sys.timezone()) {
 #'
 #' @return A "shiny.tag" object
 #' @export
-record_lockfile <- function(repo_spec, dir, collection = "_posts",
+insert_lockfile <- function(repo_spec, dir, collection = "_posts",
                             branch = "master", host = "https://github.com",
                             text = "R environment") {
   path <- paste(
@@ -34,7 +79,7 @@ record_lockfile <- function(repo_spec, dir, collection = "_posts",
 }
 
 
-#' Records a link to the source code
+#' Inserts a link to the source code
 #'
 #' @param dir The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "_posts")
@@ -45,9 +90,9 @@ record_lockfile <- function(repo_spec, dir, collection = "_posts",
 #'
 #' @return A "shiny.tag" object
 #' @export
-record_source <- function(repo_spec, dir, collection = "_posts",
-                            branch = "master", host = "https://github.com",
-                            text = "source code") {
+insert_source <- function(repo_spec, dir, collection = "_posts",
+                          branch = "master", host = "https://github.com",
+                          text = "source code") {
   path <- paste(
     host, repo_spec, "tree", branch, collection, dir, sep = "/"
   )
