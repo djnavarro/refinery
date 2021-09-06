@@ -161,7 +161,7 @@ renv_initialise <- function(dir, collection = "_posts") {
   # ensure the minimal set of packages exsits in the library
   renv::install(
     packages = c("renv", "distill", "djnavarro/refinery"),
-    library = refinery:::renv_library(dir, collection)
+    library = renv_library(dir, collection)
   )
 
   # analyse the post folder and create lockfile
@@ -169,6 +169,9 @@ renv_initialise <- function(dir, collection = "_posts") {
 
   # use the lockfile to populate the library
   renv_restore(dir, collection)
+
+  # deactivate the renv project
+  renv::deactivate(renv_path(dir, collection))
 
   # restore the working directory
   setwd(wd)
