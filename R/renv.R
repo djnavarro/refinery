@@ -143,22 +143,16 @@ renv_restore <- function(dir, collection = "_posts", clean = FALSE, ...) {
 #' @export
 #'
 #' @details Note that this is not quite equivalent to renv::init
-renv_initialise <- function(dir, collection = "_posts") {
+renv_new <- function(dir, collection = "_posts") {
 
-  wd <- getwd()
+  renv_dir <- renv_path(dir, collection)
+  renv_lib <- renv_library(dir, collecion)
 
-  # bare project
-  renv::init(
-    project = renv_path(dir, collection),
-    bare = TRUE,
-    restart = FALSE
-  )
+  # create directories (yes, this is redundant)
+  if(!fs::dir_exists(renv_dir)) fs::dir_create(renv_dir)
+  if(!fs::dir_exists(renv_lib)) fs::dir_create(renv_lib)
 
-  # the renv project library isn't a separate project
-  rproj <- fs::path(renv_path(dir, collection), paste0(dir, ".Rproj"))
-  fs::file_delete(rproj)
-
-  # ensure the minimal set of packages exsits in the library
+  # ensure the minimal set of packages exists in the library
   renv::install(
     packages = c("renv", "distill", "djnavarro/refinery"),
     library = renv_library(dir, collection)
@@ -169,12 +163,6 @@ renv_initialise <- function(dir, collection = "_posts") {
 
   # use the lockfile to populate the library
   renv_restore(dir, collection)
-
-  # deactivate the renv project
-  renv::deactivate(renv_path(dir, collection))
-
-  # restore the working directory
-  setwd(wd)
 }
 
 
