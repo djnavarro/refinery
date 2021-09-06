@@ -4,7 +4,7 @@
 \alias{insert_netlify_redirect}
 \title{Setup redirections for netlify deployment}
 \usage{
-insert_netlify_redirect(slug, date, collection = "posts")
+insert_netlify_redirect(slug, date, collection = "posts", publish = "_site")
 }
 \arguments{
 \item{slug}{The slug for the post}
@@ -12,6 +12,8 @@ insert_netlify_redirect(slug, date, collection = "posts")
 \item{date}{The date for the post}
 
 \item{collection}{The collection (default = "posts")}
+
+\item{publish}{The publish directory (default = "_site")}
 }
 \value{
 ???

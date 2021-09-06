@@ -106,10 +106,11 @@ insert_source <- function(repo_spec, dir, collection = "_posts",
 #' @param slug The slug for the post
 #' @param date The date for the post
 #' @param collection The collection (default = "posts")
+#' @param publish The publish directory (default = "_site")
 #'
 #' @return ???
 #' @export
-insert_netlify_redirect <- function(slug, date, collection = "posts") {
+insert_netlify_redirect <- function(slug, date, collection = "posts", publish = "_site") {
 
   elegant_url <- paste0("/", slug)
   verbose_url <- paste0("/", collection, "/", date, "_", slug)
@@ -122,6 +123,11 @@ insert_netlify_redirect <- function(slug, date, collection = "posts") {
   if(!any(content == redirection)) {
     content <- c(content, redirection)
     brio::write_lines(content, redirect_file)
+    fs::file_copy(
+      path = redirect_file,
+      new_path = paste0(publish, "/", redirect_file),
+      overwrite = TRUE
+    )
   }
 }
 
