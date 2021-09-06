@@ -148,4 +148,23 @@ renv_new <- function(dir, collection = "_posts") {
   )
 }
 
+#' Delete the renv set up associated with a post
+#'
+#' @param dir The folder in which the article is located
+#' @param collection The collection the article belongs to (default = "_posts")
+#'
+#' @return ??
+#' @export
+renv_delete <- function(dir, collection = "_posts") {
+  delete_if_exists(renv_lockfile(dir, collection))
+  renv_dir <- renv_path(dir, collection)
+  renv_files <- list.files(renv_dir, all.files = TRUE,
+                           recursive = TRUE, full.names = TRUE)
+  lapply(renv_files, delete_if_exists)
+}
+
+delete_if_exists <- function(file) {
+  if(fs::file_exists(file)) fs::file_delete(file)
+}
+
 
