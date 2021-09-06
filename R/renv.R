@@ -56,21 +56,6 @@ renv_lockfile <- function(dir, collection = "_posts") {
   fs::path(post_path(dir, collection), "renv.lock")
 }
 
-#' Use the R environment associated with a distill article
-#'
-#' @param dir The folder in which the article is located
-#' @param collection The collection the article belongs to (default = "_posts")
-#' @param ... Arguments to be passed to renv::use()
-#'
-#' @return ???
-#' @export
-renv_use <- function(dir, collection = "_posts", ...) {
-  renv::use(
-    lockfile = renv_lockfile(dir, collection),
-    library = renv_library(dir, collection),
-    ...
-  )
-}
 
 #' Locate the library for the post
 #'
@@ -102,14 +87,17 @@ renv_load <- function(dir, collection = "_posts", ...) {
 #' @param dir The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "_posts")
 #' @param ... Arguments to be passed to renv::snapshot()
+#' @param type Type of snapshot to take (defaults to "all")
+#' @param prompt Prompt user?
 #'
 #' @return ???
 #' @export
-renv_snapshot <- function(dir, collection = "_posts", ...) {
+renv_snapshot <- function(dir, collection = "_posts", type = "all", prompt = FALSE, ...) {
   renv::snapshot(
     project = post_path(dir, collection),
     lockfile = renv_lockfile(dir, collection),
-    prompt = FALSE,
+    type = type,
+    prompt = prompt,
     ...
   )
 }
@@ -120,18 +108,19 @@ renv_snapshot <- function(dir, collection = "_posts", ...) {
 #' @param collection The collection the article belongs to (default = "_posts")
 #' @param clean Remove packages not recorded in the lockfile? (default = FALSE)
 #' @param ... Arguments to be passed to renv::restore()
+#' @param prompt Prompt user?
 #'
 #' @return ???
 #' @export
-renv_restore <- function(dir, collection = "_posts", clean = FALSE, ...) {
+renv_restore <- function(dir, collection = "_posts", clean = FALSE, prompt = FALSE, ...) {
   renv::restore(
     library = renv_library(dir, collection),
     lockfile = renv_lockfile(dir, collection),
-    prompt = FALSE,
+    prompt = prompt,
+    clean = clean,
     ...
   )
 }
-
 
 
 #' Create a minimal renv for a post
