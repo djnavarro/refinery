@@ -145,6 +145,8 @@ renv_restore <- function(dir, collection = "_posts", clean = FALSE, ...) {
 #' @details Note that this is not quite equivalent to renv::init
 renv_initialise <- function(dir, collection = "_posts") {
 
+  wd <- getwd()
+
   # bare project
   renv::init(
     project = renv_path(dir, collection),
@@ -168,6 +170,8 @@ renv_initialise <- function(dir, collection = "_posts") {
   # use the lockfile to populate the library
   renv_restore(dir, collection)
 
+  # restore the working directory
+  setwd(wd)
 }
 
 
