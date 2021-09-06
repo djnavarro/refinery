@@ -122,11 +122,6 @@ insert_netlify_redirect <- function(slug, date, collection = "posts") {
   if(!any(content == redirection)) {
     content <- c(content, redirection)
     brio::write_lines(content, redirect_file)
-    fs::file_copy(
-      path = redirect_file,
-      new_path = redirect_file,
-      overwrite = TRUE
-    )
   }
 }
 
