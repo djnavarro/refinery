@@ -146,7 +146,7 @@ renv_restore <- function(dir, collection = "_posts", clean = FALSE, ...) {
 renv_new <- function(dir, collection = "_posts") {
 
   renv_dir <- renv_path(dir, collection)
-  renv_lib <- renv_library(dir, collecion)
+  renv_lib <- renv_library(dir, collection)
 
   # create directories (yes, this is redundant)
   if(!fs::dir_exists(renv_dir)) fs::dir_create(renv_dir)
