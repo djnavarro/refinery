@@ -4,14 +4,20 @@
 \alias{renv_snapshot}
 \title{Create a snapshot of the R environment for the post}
 \usage{
-renv_snapshot(dir, collection = "_posts", type = "all", prompt = FALSE, ...)
+renv_snapshot(
+  dir,
+  collection = "_posts",
+  type = "implicit",
+  prompt = FALSE,
+  ...
+)
 }
 \arguments{
 \item{dir}{The folder in which the article is located}
 
 \item{collection}{The collection the article belongs to (default = "_posts")}
 
-\item{type}{Type of snapshot to take (defaults to "all")}
+\item{type}{Type of snapshot to take (defaults to "implicit")}
 
 \item{prompt}{Prompt user?}
 
