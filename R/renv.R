@@ -158,9 +158,7 @@ renv_new <- function(dir, collection = "_posts") {
 renv_delete <- function(dir, collection = "_posts") {
   delete_if_exists(renv_lockfile(dir, collection))
   renv_dir <- renv_path(dir, collection)
-  renv_files <- list.files(renv_dir, all.files = TRUE,
-                           recursive = TRUE, full.names = TRUE)
-  lapply(renv_files, delete_if_exists)
+  fs::dir_delete(renv_dir)
 }
 
 delete_if_exists <- function(file) {
