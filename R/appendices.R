@@ -72,7 +72,7 @@ insert_lockfile <- function(repo_spec, dir, collection = "_posts",
                             branch = "master", host = "https://github.com",
                             text = "R environment") {
   path <- paste(
-    host, repo_spec, "tree", branch, "_refinery", collection, dir,
+    host, repo_spec, "tree", branch, collection, dir,
     "renv.lock", sep = "/"
   )
   return(htmltools::a(href = path, text))
