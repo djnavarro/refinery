@@ -134,7 +134,7 @@ renv_restore <- function(dir, collection = "_posts", clean = FALSE, ...) {
 
 
 
-#' Create the renv setup
+#' Create a minimal renv for a post
 #'
 #' @param dir The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "_posts")
@@ -142,7 +142,7 @@ renv_restore <- function(dir, collection = "_posts", clean = FALSE, ...) {
 #' @return ??
 #' @export
 #'
-#' @details Note that this is not quite equivalent to renv::init
+#' @details Creates the renv library and installs renv, distill and refinery
 renv_new <- function(dir, collection = "_posts") {
 
   renv_dir <- renv_path(dir, collection)
@@ -157,12 +157,6 @@ renv_new <- function(dir, collection = "_posts") {
     packages = c("renv", "distill", "djnavarro/refinery"),
     library = renv_library(dir, collection)
   )
-
-  # analyse the post folder and create lockfile
-  renv_snapshot(dir, collection)
-
-  # use the lockfile to populate the library
-  renv_restore(dir, collection)
 }
 
 

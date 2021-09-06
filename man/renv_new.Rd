@@ -2,7 +2,7 @@
 % Please edit documentation in R/renv.R
 \name{renv_new}
 \alias{renv_new}
-\title{Create the renv setup}
+\title{Create a minimal renv for a post}
 \usage{
 renv_new(dir, collection = "_posts")
 }
@@ -15,8 +15,8 @@ renv_new(dir, collection = "_posts")
 ??
 }
 \description{
-Create the renv setup
+Create a minimal renv for a post
 }
 \details{
-Note that this is not quite equivalent to renv::init
+Creates the renv library and installs renv, distill and refinery
 }

@@ -1,6 +1,6 @@
 Package: refinery
 Title: Reproducibility Tools For Distill Sites
-Version: 0.0.0.9021
+Version: 0.0.0.9022
 Authors@R: 
     person(given = "Danielle",
            family = "Navarro",
