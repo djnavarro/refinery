@@ -98,3 +98,36 @@ insert_source <- function(repo_spec, dir, collection = "_posts",
   )
   return(htmltools::a(href = path, text))
 }
+
+
+
+#' Setup redirections for netlify deployment
+#'
+#' @param slug The slug for the post
+#' @param date The date for the post
+#' @param collection The collection (default = "posts")
+#'
+#' @return ???
+#' @export
+insert_netlify_redirect <- function(slug, date, collection = "posts") {
+
+  elegant_url <- paste0("/", slug)
+  verbose_url <- paste0("/", collection, "/", date, "_", slug)
+  redirection <- paste(elegant_url, verbose_url)
+
+  blogroot <- rprojroot::find_root("_site.yml")
+  redirect_file <- fs::path(blogroot, "_redirects")
+
+  content <- brio::read_lines(redirect_file)
+  if(!any(content == redirection)) {
+    content <- c(content, redirection)
+    brio::write_lines(content, redirect_file)
+    fs::file_copy(
+      path = redirect_file,
+      new_path = redirect_file,
+      overwrite = TRUE
+    )
+  }
+}
+
+

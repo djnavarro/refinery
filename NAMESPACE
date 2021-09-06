@@ -2,6 +2,7 @@
 
 export(insert_appendix)
 export(insert_lockfile)
+export(insert_netlify_redirect)
 export(insert_source)
 export(insert_timestamp)
 export(renv_delete)
