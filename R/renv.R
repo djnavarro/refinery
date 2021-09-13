@@ -69,9 +69,19 @@ renv_new <- function(dir, collection = "_posts") {
   renv_dir <- renv_path(dir, collection)
   renv_lib <- renv_library(dir, collection)
 
+  wd <- getwd()
+  on.exit(setwd(wd))
+
   # create directories (yes, this is redundant)
   if(!fs::dir_exists(renv_dir)) fs::dir_create(renv_dir)
   if(!fs::dir_exists(renv_lib)) fs::dir_create(renv_lib)
+
+  # initialise a bare project
+  renv::init(
+    project = renv_dir,
+    bare = TRUE,
+    restart = TRUE
+  )
 
   # ensure the minimal set of packages exists in the library
   renv::install(
