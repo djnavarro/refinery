@@ -1,19 +1,19 @@
 
-#' Create new post from existing template
+#' Create new article from existing template
 #'
 #' @param template Path to template file
-#' @param slug Semantic slug for the post (in-kebab-case)
-#' @param date Date for the post (in YYYY-MM-DD)
-#' @param collection Collection to contain the post (default = "_posts")
+#' @param slug Semantic slug for the article (in-kebab-case)
+#' @param date Date for the article (in YYYY-MM-DD)
+#' @param collection Collection to contain the article (default = "_posts")
 #' @param slug_replace Pattern to be replaced with slug
 #' @param date_replace Pattern to be replaced with date
 #' @param renv_new Initialise a new R environment?
-#' @param open Open the post in RStudio?
+#' @param open Open the article in RStudio?
 #'
 #' @return ???
 #' @export
 #'
-use_post_template <- function(
+use_article_template <- function(
   template,
   slug,
   date = NULL,
@@ -52,3 +52,7 @@ use_post_template <- function(
     rstudioapi::navigateToFile(post_file)
   }
 }
+
+
+
+
