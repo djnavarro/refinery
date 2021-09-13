@@ -8,6 +8,7 @@
 #' @param slug_replace Pattern to be replaced with slug
 #' @param date_replace Pattern to be replaced with date
 #' @param renv_new Initialise a new R environment?
+#' @param open Open the post in RStudio?
 #'
 #' @return ???
 #' @export
@@ -19,7 +20,8 @@ use_post_template <- function(
   collection = "_posts",
   slug_replace = "INSERT-SLUG-HERE",
   date_replace = "INSERT-DATE-HERE",
-  renv_new = TRUE
+  renv_new = TRUE,
+  open = interactive()
 ) {
 
   if(is.null(date)) {
@@ -44,4 +46,9 @@ use_post_template <- function(
   brio::write_lines(lines, post_file)
 
   if(renv_new == TRUE) {renv_new(long_slug, collection)}
+
+  # open the post if requested (and RStudio available)
+  if(open == TRUE & rstudioapi::isAvailable()) {
+    rstudioapi::navigateToFile(post_file)
+  }
 }

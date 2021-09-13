@@ -1,6 +1,6 @@
 Package: refinery
 Title: Reproducibility Tools For Distill Sites
-Version: 0.0.0.9039
+Version: 0.0.0.9040
 Authors@R: 
     person(given = "Danielle",
            family = "Navarro",
@@ -21,6 +21,7 @@ Imports:
     renv,
     fs,
     lubridate,
-    htmltools
+    htmltools,
+    rstudioapi
 URL: https://github.com/djnavarro/refinery
 BugReports: https://github.com/djnavarro/refinery/issues
