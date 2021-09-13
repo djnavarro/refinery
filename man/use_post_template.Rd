@@ -11,7 +11,8 @@ use_post_template(
   collection = "_posts",
   slug_replace = "INSERT-SLUG-HERE",
   date_replace = "INSERT-DATE-HERE",
-  renv_new = TRUE
+  renv_new = TRUE,
+  open = interactive()
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ use_post_template(
 \item{date_replace}{Pattern to be replaced with date}
 
 \item{renv_new}{Initialise a new R environment?}
+
+\item{open}{Open the post in RStudio?}
 }
 \value{
 ???
