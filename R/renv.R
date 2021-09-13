@@ -97,19 +97,22 @@ renv_delete <- function(dir, collection = "_posts") {
 
 # helpers -----------------------------------------------------------------
 
+site_root <- function() {
+  rprojroot::find_root("_site.yml")
+}
 
-renv_path <- function(dir, collection = "_posts") {
+renv_path <- function(dir, collection = "_posts", root = site_root()) {
   fs::path(
-    rprojroot::find_root("_site.yml"),
+    root,
     "_renv",
     collection,
     dir
   )
 }
 
-post_path <- function(dir, collection = "_posts") {
+post_path <- function(dir, collection = "_posts", root = site_root()) {
   fs::path(
-    rprojroot::find_root("_site.yml"),
+    root,
     collection,
     dir
   )
