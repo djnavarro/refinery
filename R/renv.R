@@ -55,7 +55,7 @@ renv_restore <- function(dir, collection = "_posts", clean = FALSE, prompt = FAL
 }
 
 
-#' Create a minimal renv for a post
+#' Create a minimal R environment for a post
 #'
 #' @param dir The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "_posts")
@@ -116,7 +116,7 @@ post_path <- function(dir, collection = "_posts") {
 }
 
 renv_lockfile <- function(dir, collection = "_posts") {
-  fs::path(post_path(dir, collection), "renv.lock")
+  fs::path(renv_path(dir, collection), "renv.lock")
 }
 
 
