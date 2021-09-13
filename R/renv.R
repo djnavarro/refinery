@@ -47,6 +47,7 @@ renv_snapshot <- function(dir, collection = "_posts", type = "implicit", prompt 
 #' @return ???
 #' @export
 renv_restore <- function(dir, collection = "_posts", clean = FALSE, prompt = FALSE, ...) {
+  renv_set_cache() # <- use hack
   renv::restore(
     library = renv_library(dir, collection),
     lockfile = renv_lockfile(dir, collection),
@@ -56,6 +57,12 @@ renv_restore <- function(dir, collection = "_posts", clean = FALSE, prompt = FAL
   )
 }
 
+# temporary hack!
+renv_set_cache <- function() {
+  Sys.setenv(
+    RENV_PATHS_CACHE = normalizePath("~/.local/share/renv/cache/")
+  )
+}
 
 #' Create a minimal R environment for a post
 #'
