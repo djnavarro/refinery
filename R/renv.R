@@ -83,6 +83,11 @@ renv_new <- function(dir, collection = "_posts") {
     restart = FALSE
   )
 
+  # remove unneded proj file and restores working directory
+  proj_file <- fs::path(renv_dir, paste0(dir, ".Rproj"))
+  if(fs::file_exists(proj_file)) fs::file_delete(proj_file)
+  setwd(wd)
+
   # ensure the minimal set of packages exists in the library
   renv::install(
     packages = c("renv", "distill", "djnavarro/refinery"),
