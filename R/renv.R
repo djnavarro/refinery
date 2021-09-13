@@ -80,7 +80,7 @@ renv_new <- function(dir, collection = "_posts") {
   renv::init(
     project = renv_dir,
     bare = TRUE,
-    restart = TRUE
+    restart = FALSE
   )
 
   # ensure the minimal set of packages exists in the library
