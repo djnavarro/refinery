@@ -24,6 +24,8 @@ renv_load <- function(dir, collection = "_posts", ...) {
 #' @return ???
 #' @export
 renv_snapshot <- function(dir, collection = "_posts", type = "implicit", prompt = FALSE, ...) {
+  wd <- setwd(post_path(dir, collection))
+  on.exit(setwd(wd))
   renv::snapshot(
     project = post_path(dir, collection),
     lockfile = renv_lockfile(dir, collection),
