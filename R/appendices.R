@@ -31,7 +31,8 @@ distill_appendix <- function(name, content) {
   paste(
     paste("##", name, "{.appendix}"),
     " ",
-    content
+    content,
+    sep = "\n"
   )
 }
 
