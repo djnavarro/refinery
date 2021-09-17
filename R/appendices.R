@@ -8,40 +8,30 @@
 #' @return A shiny.tag object
 #' @export
 insert_appendix <- function(repo_spec, dir, collection = "_posts") {
-  htmltools::tagList(
+  knitr::asis_output(
     distill_appendix(
       name = "Last updated",
       content = insert_timestamp()
-    ),
-    distill_appendix(
-      name = "Details",
-      content = htmltools::span(
-        insert_source(repo_spec, dir, collection),
-        ", ",
-        insert_lockfile(repo_spec, dir, collection)
-      )
     )
   )
+  # ,
+  #   distill_appendix(
+  #     name = "Details",
+  #     content = htmltools::span(
+  #       insert_source(repo_spec, dir, collection),
+  #       ", ",
+  #       insert_lockfile(repo_spec, dir, collection)
+  #     )
+  #   )
+  # )
 }
 
 
 distill_appendix <- function(name, content) {
-  htmltools::tag(
-    "d-appendix",
-    list(
-      style = "display: grid;",
-      htmltools::h3(
-        id = gsub("[[:space:]]+", "-", tolower(name)),
-        #class = "appendix",
-        name
-      ),
-      htmltools::div(
-        class = "l-body",
-        htmltools::p(
-          content
-        )
-      )
-    )
+  paste(
+    paste("##", name, "{.appendix}"),
+    " ",
+    content
   )
 }
 
@@ -54,7 +44,7 @@ distill_appendix <- function(name, content) {
 insert_timestamp <- function(tzone = Sys.timezone()) {
   time <- lubridate::now(tzone = tzone)
   stamp <- as.character(time, tz = tzone, usetz = TRUE)
-  return(htmltools::span(stamp))
+  return(stamp)
 }
 
 #' Inserts a link to the lock file
