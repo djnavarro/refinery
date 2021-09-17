@@ -32,7 +32,7 @@ distill_appendix <- function(name, content) {
       style = "display: grid;",
       htmltools::h3(
         id = gsub("[[:space:]]+", "-", tolower(name)),
-        class = "appendix",
+        #class = "appendix",
         name
       ),
       htmltools::div(
