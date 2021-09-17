@@ -8,32 +8,38 @@
 #' @return A shiny.tag object
 #' @export
 insert_appendix <- function(repo_spec, dir, collection = "_posts") {
-  knitr::asis_output(
-    distill_appendix(
+
+  appendices <- paste(
+    markdown_appendix(
       name = "Last updated",
       content = insert_timestamp()
-    )
+    ),
+    " ",
+    markdown_appendix(
+      name = "Details",
+      content = paste(
+        insert_source(repo_spec, dir, collection),
+        insert_lockfile(repo_spec, dir, collection),
+        sep = ", "
+      )
+    ),
+    sep = "\n"
   )
-  # ,
-  #   distill_appendix(
-  #     name = "Details",
-  #     content = htmltools::span(
-  #       insert_source(repo_spec, dir, collection),
-  #       ", ",
-  #       insert_lockfile(repo_spec, dir, collection)
-  #     )
-  #   )
-  # )
+  knitr::asis_output(appendices)
 }
 
 
-distill_appendix <- function(name, content) {
+markdown_appendix <- function(name, content) {
   paste(
     paste("##", name, "{.appendix}"),
     " ",
     content,
     sep = "\n"
   )
+}
+
+markdown_link <- function(text, path) {
+  paste0("[", text, "](", path, ")")
 }
 
 #' Records a time stamp to the R markdown output
@@ -66,9 +72,8 @@ insert_lockfile <- function(repo_spec, dir, collection = "_posts",
     host, repo_spec, "tree", branch, "_renv", collection, dir,
     "renv.lock", sep = "/"
   )
-  return(htmltools::a(href = path, text))
+  return(markdown_link(text, path))
 }
-
 
 #' Inserts a link to the source code
 #'
@@ -87,7 +92,7 @@ insert_source <- function(repo_spec, dir, collection = "_posts",
   path <- paste(
     host, repo_spec, "tree", branch, collection, dir, sep = "/"
   )
-  return(htmltools::a(href = path, text))
+  return(markdown_link(text, path))
 }
 
 
