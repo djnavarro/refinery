@@ -1,6 +1,6 @@
 Package: refinery
 Title: Reproducibility Tools For Distill Sites
-Version: 0.0.0.9052
+Version: 0.0.0.9053
 Authors@R: 
     person(given = "Danielle",
            family = "Navarro",
@@ -29,6 +29,7 @@ Imports:
     rstudioapi,
     knitr,
     cli,
-    brio
+    brio,
+    stringr
 URL: https://github.com/djnavarro/refinery
 BugReports: https://github.com/djnavarro/refinery/issues

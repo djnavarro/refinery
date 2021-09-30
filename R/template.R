@@ -38,8 +38,8 @@ use_article_template <- function(
 
   # write the template, replacing the slug and the date
   lines <- brio::read_lines(template)
-  lines <- gsub(pattern = slug_replace, replacement = slug, x = lines)
-  lines <- gsub(pattern = date_replace, replacement = date, x = lines)
+  lines <- stringr::str_replace_all(lines, slug_replace, slug)
+  lines <- stringr::str_replace_all(lines, date_replace, date)
   brio::write_lines(lines, post_file)
 
   if(renv_new == TRUE) {renv_new(name, collection)}
