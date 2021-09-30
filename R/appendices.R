@@ -1,15 +1,13 @@
 
 #' Inserts the default refinery appendix
 #'
-#' @param dir The folder in which the article is located
+#' @param name The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "posts")
 #' @param repo_spec Repository specification, formatted as "user/repo_name"
 #'
 #' @return A shiny.tag object
 #' @export
-insert_appendix <- function(repo_spec, dir, collection = "posts") {
-
-  collection <- paste0("_", collection)
+insert_appendix <- function(repo_spec, name, collection = "posts") {
 
   appendices <- paste(
     markdown_appendix(
@@ -20,8 +18,8 @@ insert_appendix <- function(repo_spec, dir, collection = "posts") {
     markdown_appendix(
       name = "Details",
       content = paste(
-        insert_source(repo_spec, dir, collection),
-        insert_lockfile(repo_spec, dir, collection),
+        insert_source(repo_spec, name, collection),
+        insert_lockfile(repo_spec, name, collection),
         sep = ", "
       )
     ),
@@ -58,7 +56,7 @@ insert_timestamp <- function(tzone = Sys.timezone()) {
 
 #' Inserts a link to the lock file
 #'
-#' @param dir The folder in which the article is located
+#' @param name The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "posts")
 #' @param repo_spec Repository specification, formatted as "user/repo_name"
 #' @param branch Name of the branch to look at
@@ -67,14 +65,14 @@ insert_timestamp <- function(tzone = Sys.timezone()) {
 #'
 #' @return A "shiny.tag" object
 #' @export
-insert_lockfile <- function(repo_spec, dir, collection = "posts",
+insert_lockfile <- function(repo_spec, name, collection = "posts",
                             branch = "master", host = "https://github.com",
                             text = "R environment") {
 
   collection <- paste0("_", collection)
 
   path <- paste(
-    host, repo_spec, "tree", branch, "_renv", collection, dir,
+    host, repo_spec, "tree", branch, "_renv", collection, name,
     "renv.lock", sep = "/"
   )
   return(markdown_link(text, path))
@@ -82,7 +80,7 @@ insert_lockfile <- function(repo_spec, dir, collection = "posts",
 
 #' Inserts a link to the source code
 #'
-#' @param dir The folder in which the article is located
+#' @param name The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "posts")
 #' @param repo_spec Repository specification, formatted as "user/repo_name"
 #' @param branch Name of the branch to look at
@@ -91,12 +89,11 @@ insert_lockfile <- function(repo_spec, dir, collection = "posts",
 #'
 #' @return A "shiny.tag" object
 #' @export
-insert_source <- function(repo_spec, dir, collection = "posts",
+insert_source <- function(repo_spec, name, collection = "posts",
                           branch = "master", host = "https://github.com",
                           text = "source code") {
-  collection <- paste0("_", collection)
   path <- paste(
-    host, repo_spec, "tree", branch, collection, dir, sep = "/"
+    host, repo_spec, "tree", branch, paste0("_", collection), name, sep = "/"
   )
   return(markdown_link(text, path))
 }
