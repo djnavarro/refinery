@@ -24,18 +24,13 @@ use_article_template <- function(
   open = interactive()
 ) {
 
-  collection <- with_underscore(collection)
-
   if(is.null(date)) {
     date <- lubridate::format_ISO8601(lubridate::today())
   }
-  long_slug <- paste(date, slug, sep = "_")
+  name <- paste(date, slug, sep = "_")
+  post <- specify_post(name, collection)
 
-  # relevant folders
-  proj_dir <- rprojroot::find_root("_site.yml")
-  post_dir <- fs::path(proj_dir, collection, long_slug)
-
-  # file
+  post_dir <- full_post_path(post)
   post_file <- fs::path(post_dir, "index.Rmd")
 
   # create post folder
@@ -47,7 +42,7 @@ use_article_template <- function(
   lines <- gsub(pattern = date, replacement = date_replace, x = lines)
   brio::write_lines(lines, post_file)
 
-  if(renv_new == TRUE) {renv_new(long_slug, collection)}
+  if(renv_new == TRUE) {renv_new(name, collection)}
 
   # open the post if requested (and RStudio available)
   if(open == TRUE & rstudioapi::isAvailable()) {

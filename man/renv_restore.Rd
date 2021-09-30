@@ -4,10 +4,10 @@
 \alias{renv_restore}
 \title{Restore the renv project}
 \usage{
-renv_restore(dir, collection = "posts", clean = FALSE, prompt = FALSE, ...)
+renv_restore(name, collection = "posts", clean = FALSE, prompt = FALSE, ...)
 }
 \arguments{
-\item{dir}{The folder in which the article is located}
+\item{name}{The folder in which the article is located}
 
 \item{collection}{The collection the article belongs to (default = "posts")}
 

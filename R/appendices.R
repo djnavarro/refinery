@@ -9,7 +9,7 @@
 #' @export
 insert_appendix <- function(repo_spec, dir, collection = "posts") {
 
-  collection <- with_underscore(collection)
+  collection <- paste0("_", collection)
 
   appendices <- paste(
     markdown_appendix(
@@ -71,7 +71,7 @@ insert_lockfile <- function(repo_spec, dir, collection = "posts",
                             branch = "master", host = "https://github.com",
                             text = "R environment") {
 
-  collection <- with_underscore(collection)
+  collection <- paste0("_", collection)
 
   path <- paste(
     host, repo_spec, "tree", branch, "_renv", collection, dir,
@@ -94,7 +94,7 @@ insert_lockfile <- function(repo_spec, dir, collection = "posts",
 insert_source <- function(repo_spec, dir, collection = "posts",
                           branch = "master", host = "https://github.com",
                           text = "source code") {
-  collection <- with_underscore(collection)
+  collection <- paste0("_", collection)
   path <- paste(
     host, repo_spec, "tree", branch, collection, dir, sep = "/"
   )

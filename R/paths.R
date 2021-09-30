@@ -1,35 +1,31 @@
 
 
+
+specify_post <- function(name, collection) {
+  collection <- paste0("_", collection)
+  fs::path(collection, name)
+}
+
+
+# these return full paths -------------------------------------------------
+
 site_root <- function() {
   rprojroot::find_root("_site.yml")
 }
 
-post_path <- function(dir, collection = "posts", root = site_root()) {
-  collection <- with_underscore(collection)
-  fs::path(
-    root,
-    collection,
-    dir
-  )
+full_post_path <- function(article) {
+  fs::path(site_root(), article)
 }
 
-renv_path <- function(dir, collection = "posts", root = site_root()) {
-  collection <- with_underscore(collection)
-  fs::path(
-    root,
-    "_renv",
-    collection,
-    dir
-  )
+full_renv_path <- function(article) {
+  fs::path(site_root(), "_renv", article)
 }
 
-renv_lockfile <- function(dir, collection = "posts") {
-  collection <- with_underscore(collection)
-  fs::path(renv_path(dir, collection), "renv.lock")
+full_lockfile_path <- function(article) {
+  fs::path(full_renv_path(article), "renv.lock")
 }
 
-
-renv_library <- function(dir, collection = "posts") {
-  collection <- with_underscore(collection)
-  renv::paths$library(project = renv_path(dir, collection))
+full_library_path <- function(article) {
+  renv::paths$library(project = full_renv_path(article))
 }
+

@@ -1,24 +1,21 @@
 
-with_underscore <- function(name) {
-  paste0("_", name)
-}
-
 #' Load the renv library
 #'
-#' @param dir The folder in which the article is located
+#' @param name The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "posts")
 #' @param ... Arguments to be passed to renv::load()
 #'
 #' @return ???
 #' @export
-renv_load <- function(dir, collection = "posts", ...) {
-  renv::load(project = renv_path(dir, with_underscore(collection)), ...)
+renv_load <- function(name, collection = "posts", ...) {
+  post <- specify_post(name, collection)
+  renv::load(project = full_renv_path(post), ...)
 }
 
 
 #' Create a snapshot of the R environment for the post
 #'
-#' @param dir The folder in which the article is located
+#' @param name The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "posts")
 #' @param ... Arguments to be passed to renv::snapshot()
 #' @param type Type of snapshot to take (defaults to "implicit")
@@ -26,13 +23,15 @@ renv_load <- function(dir, collection = "posts", ...) {
 #'
 #' @return ???
 #' @export
-renv_snapshot <- function(dir, collection = "posts", type = "implicit", prompt = FALSE, ...) {
-  collection <- with_underscore(collection)
-  wd <- setwd(post_path(dir, collection))
-  on.exit(setwd(wd))
+renv_snapshot <- function(name, collection = "posts", type = "implicit", prompt = FALSE, ...) {
+
+  post <- specify_post(name, collection)
+  old_working_directory <- setwd(full_post_path(post))
+  on.exit(setwd(old_working_directory))
+
   renv::snapshot(
-    project = post_path(dir, collection),
-    lockfile = renv_lockfile(dir, collection),
+    project = full_post_path(post),
+    lockfile = full_lockfile_path(post),
     type = type,
     prompt = prompt,
     ...
@@ -42,7 +41,7 @@ renv_snapshot <- function(dir, collection = "posts", type = "implicit", prompt =
 
 #' Restore the renv project
 #'
-#' @param dir The folder in which the article is located
+#' @param name The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "posts")
 #' @param clean Remove packages not recorded in the lockfile? (default = FALSE)
 #' @param ... Arguments to be passed to renv::restore()
@@ -50,12 +49,13 @@ renv_snapshot <- function(dir, collection = "posts", type = "implicit", prompt =
 #'
 #' @return ???
 #' @export
-renv_restore <- function(dir, collection = "posts", clean = FALSE, prompt = FALSE, ...) {
+renv_restore <- function(name, collection = "posts", clean = FALSE, prompt = FALSE, ...) {
   renv_set_cache() # <- use hack
-  collection <- with_underscore(collection)
+
+  post <- specify_post(name, collection)
   renv::restore(
-    library = renv_library(dir, collection),
-    lockfile = renv_lockfile(dir, collection),
+    library = full_library_path(post),
+    lockfile = full_lockfile_path(post),
     prompt = prompt,
     clean = clean,
     ...
@@ -71,21 +71,22 @@ renv_set_cache <- function() {
 
 #' Create a minimal R environment for a post
 #'
-#' @param dir The folder in which the article is located
+#' @param name The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "posts")
 #'
 #' @return ??
 #' @export
 #'
 #' @details Creates the renv library and installs renv, distill and refinery
-renv_new <- function(dir, collection = "posts") {
+renv_new <- function(name, collection = "posts") {
 
-  collection <- with_underscore(collection)
-  renv_dir <- renv_path(dir, collection)
-  renv_lib <- renv_library(dir, collection)
+  post <- specify_post(name, collection)
 
-  wd <- getwd()
-  on.exit(setwd(wd))
+  renv_dir <- full_renv_path(post)
+  renv_lib <- full_library_path(post)
+
+  current_working_directory <- getwd()
+  on.exit(setwd(current_working_directory))
 
   # create directories (yes, this is redundant)
   if(!fs::dir_exists(renv_dir)) fs::dir_create(renv_dir)
@@ -98,31 +99,34 @@ renv_new <- function(dir, collection = "posts") {
     restart = FALSE
   )
 
-  # remove unneded proj file and restores working directory
-  proj_file <- fs::path(renv_dir, paste0(dir, ".Rproj"))
+  # remove unneeded proj file and restores working directory
+  proj_file <- fs::path(renv_dir, paste0(name, ".Rproj"))
   if(fs::file_exists(proj_file)) fs::file_delete(proj_file)
-  setwd(wd)
+  setwd(current_working_directory)
 
   # ensure the minimal set of packages exists in the library
   renv::install(
     packages = c("renv", "distill", "djnavarro/refinery"),
-    library = renv_library(dir, collection)
+    library = renv_lib
   )
 }
 
 #' Delete the renv set up associated with a post
 #'
-#' @param dir The folder in which the article is located
+#' @param name The folder in which the article is located
 #' @param collection The collection the article belongs to (default = "posts")
 #'
 #' @return ??
 #' @export
-renv_delete <- function(dir, collection = "posts") {
-  collection <- with_underscore(collection)
-  renvdir <- renv_path(dir, collection)
-  lockfile <- renv_lockfile(dir, collection)
+renv_delete <- function(name, collection = "posts") {
+
+  post <- specify_post(name, collection)
+
+  renv_dir <- full_renv_path(post)
+  lockfile <- full_lockfile_path(post)
+
   if(fs::file_exists(lockfile)) fs::file_delete(lockfile)
-  fs::dir_delete(renvdir)
+  fs::dir_delete(renv_dir)
 }
 
 
