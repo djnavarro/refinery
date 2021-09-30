@@ -27,6 +27,7 @@ Imports:
     lubridate,
     htmltools,
     rstudioapi,
-    knitr
+    knitr,
+    cli
 URL: https://github.com/djnavarro/refinery
 BugReports: https://github.com/djnavarro/refinery/issues
