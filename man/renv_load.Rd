@@ -4,12 +4,12 @@
 \alias{renv_load}
 \title{Load the renv library}
 \usage{
-renv_load(dir, collection = "_posts", ...)
+renv_load(dir, collection = "posts", ...)
 }
 \arguments{
 \item{dir}{The folder in which the article is located}
 
-\item{collection}{The collection the article belongs to (default = "_posts")}
+\item{collection}{The collection the article belongs to (default = "posts")}
 
 \item{...}{Arguments to be passed to renv::load()}
 }

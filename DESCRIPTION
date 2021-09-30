@@ -28,6 +28,7 @@ Imports:
     htmltools,
     rstudioapi,
     knitr,
-    cli
+    cli,
+    brio
 URL: https://github.com/djnavarro/refinery
 BugReports: https://github.com/djnavarro/refinery/issues

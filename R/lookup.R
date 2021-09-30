@@ -2,11 +2,12 @@
 #' Locate articles matching a pattern
 #'
 #' @param pattern Regular expression
-#' @param collection The collection the article belongs to (default = "_posts")
+#' @param collection The collection the article belongs to (default = "posts")
 #'
 #' @return Character vector of paths
 #' @export
-article_named <- function(pattern, collection = "_posts") {
+article_named <- function(pattern, collection = "posts") {
+  collection <- with_underscore(collection)
   list.files(
     path = fs::path(site_root(), collection),
     pattern = pattern,
@@ -18,7 +19,7 @@ article_named <- function(pattern, collection = "_posts") {
 #' Situation report for an article
 #'
 #' @param dir The folder in which the article is located
-#' @param collection The collection the article belongs to (default = "_posts")
+#' @param collection The collection the article belongs to (default = "posts")
 #'
 #' @details Provides a minimal "situation report" for a post, listing the
 #' folders associated with the post. Later versions will check renv status, I
@@ -27,8 +28,9 @@ article_named <- function(pattern, collection = "_posts") {
 #' @return Invisibly returns a list containing the paths
 #' @export
 #'
-article_sitrep <- function(dir, collection = "_posts") {
+article_sitrep <- function(dir, collection = "posts") {
 
+  collection <- with_underscore(collection)
   sitrep <- list(
     site = site_root(),
     post = post_path(dir, collection),

@@ -7,7 +7,7 @@
 insert_lockfile(
   repo_spec,
   dir,
-  collection = "_posts",
+  collection = "posts",
   branch = "master",
   host = "https://github.com",
   text = "R environment"
@@ -18,7 +18,7 @@ insert_lockfile(
 
 \item{dir}{The folder in which the article is located}
 
-\item{collection}{The collection the article belongs to (default = "_posts")}
+\item{collection}{The collection the article belongs to (default = "posts")}
 
 \item{branch}{Name of the branch to look at}
 

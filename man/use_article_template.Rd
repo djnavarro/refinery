@@ -8,7 +8,7 @@ use_article_template(
   template,
   slug,
   date = NULL,
-  collection = "_posts",
+  collection = "posts",
   slug_replace = "INSERT-SLUG-HERE",
   date_replace = "INSERT-DATE-HERE",
   renv_new = TRUE,
@@ -22,7 +22,7 @@ use_article_template(
 
 \item{date}{Date for the article (in YYYY-MM-DD)}
 
-\item{collection}{Collection to contain the article (default = "_posts")}
+\item{collection}{Collection to contain the article (default = "posts")}
 
 \item{slug_replace}{Pattern to be replaced with slug}
 

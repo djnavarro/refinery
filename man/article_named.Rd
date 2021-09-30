@@ -4,12 +4,12 @@
 \alias{article_named}
 \title{Locate articles matching a pattern}
 \usage{
-article_named(pattern, collection = "_posts")
+article_named(pattern, collection = "posts")
 }
 \arguments{
 \item{pattern}{Regular expression}
 
-\item{collection}{The collection the article belongs to (default = "_posts")}
+\item{collection}{The collection the article belongs to (default = "posts")}
 }
 \value{
 Character vector of paths

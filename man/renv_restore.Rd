@@ -4,12 +4,12 @@
 \alias{renv_restore}
 \title{Restore the renv project}
 \usage{
-renv_restore(dir, collection = "_posts", clean = FALSE, prompt = FALSE, ...)
+renv_restore(dir, collection = "posts", clean = FALSE, prompt = FALSE, ...)
 }
 \arguments{
 \item{dir}{The folder in which the article is located}
 
-\item{collection}{The collection the article belongs to (default = "_posts")}
+\item{collection}{The collection the article belongs to (default = "posts")}
 
 \item{clean}{Remove packages not recorded in the lockfile? (default = FALSE)}
 

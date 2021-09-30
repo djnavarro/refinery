@@ -6,7 +6,7 @@
 \usage{
 renv_snapshot(
   dir,
-  collection = "_posts",
+  collection = "posts",
   type = "implicit",
   prompt = FALSE,
   ...
@@ -15,7 +15,7 @@ renv_snapshot(
 \arguments{
 \item{dir}{The folder in which the article is located}
 
-\item{collection}{The collection the article belongs to (default = "_posts")}
+\item{collection}{The collection the article belongs to (default = "posts")}
 
 \item{type}{Type of snapshot to take (defaults to "implicit")}
 

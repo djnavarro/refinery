@@ -4,12 +4,12 @@
 \alias{article_sitrep}
 \title{Situation report for an article}
 \usage{
-article_sitrep(dir, collection = "_posts")
+article_sitrep(dir, collection = "posts")
 }
 \arguments{
 \item{dir}{The folder in which the article is located}
 
-\item{collection}{The collection the article belongs to (default = "_posts")}
+\item{collection}{The collection the article belongs to (default = "posts")}
 }
 \value{
 Invisibly returns a list containing the paths

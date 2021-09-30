@@ -4,12 +4,12 @@
 \alias{renv_delete}
 \title{Delete the renv set up associated with a post}
 \usage{
-renv_delete(dir, collection = "_posts")
+renv_delete(dir, collection = "posts")
 }
 \arguments{
 \item{dir}{The folder in which the article is located}
 
-\item{collection}{The collection the article belongs to (default = "_posts")}
+\item{collection}{The collection the article belongs to (default = "posts")}
 }
 \value{
 ??

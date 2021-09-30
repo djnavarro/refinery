@@ -4,7 +4,8 @@ site_root <- function() {
   rprojroot::find_root("_site.yml")
 }
 
-post_path <- function(dir, collection = "_posts", root = site_root()) {
+post_path <- function(dir, collection = "posts", root = site_root()) {
+  collection <- with_underscore(collection)
   fs::path(
     root,
     collection,
@@ -12,7 +13,8 @@ post_path <- function(dir, collection = "_posts", root = site_root()) {
   )
 }
 
-renv_path <- function(dir, collection = "_posts", root = site_root()) {
+renv_path <- function(dir, collection = "posts", root = site_root()) {
+  collection <- with_underscore(collection)
   fs::path(
     root,
     "_renv",
@@ -21,11 +23,13 @@ renv_path <- function(dir, collection = "_posts", root = site_root()) {
   )
 }
 
-renv_lockfile <- function(dir, collection = "_posts") {
+renv_lockfile <- function(dir, collection = "posts") {
+  collection <- with_underscore(collection)
   fs::path(renv_path(dir, collection), "renv.lock")
 }
 
 
-renv_library <- function(dir, collection = "_posts") {
+renv_library <- function(dir, collection = "posts") {
+  collection <- with_underscore(collection)
   renv::paths$library(project = renv_path(dir, collection))
 }

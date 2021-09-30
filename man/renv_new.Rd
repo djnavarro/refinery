@@ -4,12 +4,12 @@
 \alias{renv_new}
 \title{Create a minimal R environment for a post}
 \usage{
-renv_new(dir, collection = "_posts")
+renv_new(dir, collection = "posts")
 }
 \arguments{
 \item{dir}{The folder in which the article is located}
 
-\item{collection}{The collection the article belongs to (default = "_posts")}
+\item{collection}{The collection the article belongs to (default = "posts")}
 }
 \value{
 ??

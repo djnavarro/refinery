@@ -4,7 +4,7 @@
 #' @param template Path to template file
 #' @param slug Semantic slug for the article (in-kebab-case)
 #' @param date Date for the article (in YYYY-MM-DD)
-#' @param collection Collection to contain the article (default = "_posts")
+#' @param collection Collection to contain the article (default = "posts")
 #' @param slug_replace Pattern to be replaced with slug
 #' @param date_replace Pattern to be replaced with date
 #' @param renv_new Initialise a new R environment?
@@ -17,12 +17,14 @@ use_article_template <- function(
   template,
   slug,
   date = NULL,
-  collection = "_posts",
+  collection = "posts",
   slug_replace = "INSERT-SLUG-HERE",
   date_replace = "INSERT-DATE-HERE",
   renv_new = TRUE,
   open = interactive()
 ) {
+
+  collection <- with_underscore(collection)
 
   if(is.null(date)) {
     date <- lubridate::format_ISO8601(lubridate::today())
@@ -41,8 +43,8 @@ use_article_template <- function(
 
   # write the template, replacing the slug and the date
   lines <- brio::read_lines(template)
-  lines <- stringr::str_replace_all(lines, slug_replace, slug)
-  lines <- stringr::str_replace_all(lines, date_replace, date)
+  lines <- gsub(pattern = slug, replacement = slug_replace, x = lines)
+  lines <- gsub(pattern = date, replacement = date_replace, x = lines)
   brio::write_lines(lines, post_file)
 
   if(renv_new == TRUE) {renv_new(long_slug, collection)}

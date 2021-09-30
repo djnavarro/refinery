@@ -2,12 +2,14 @@
 #' Inserts the default refinery appendix
 #'
 #' @param dir The folder in which the article is located
-#' @param collection The collection the article belongs to (default = "_posts")
+#' @param collection The collection the article belongs to (default = "posts")
 #' @param repo_spec Repository specification, formatted as "user/repo_name"
 #'
 #' @return A shiny.tag object
 #' @export
-insert_appendix <- function(repo_spec, dir, collection = "_posts") {
+insert_appendix <- function(repo_spec, dir, collection = "posts") {
+
+  collection <- with_underscore(collection)
 
   appendices <- paste(
     markdown_appendix(
@@ -57,7 +59,7 @@ insert_timestamp <- function(tzone = Sys.timezone()) {
 #' Inserts a link to the lock file
 #'
 #' @param dir The folder in which the article is located
-#' @param collection The collection the article belongs to (default = "_posts")
+#' @param collection The collection the article belongs to (default = "posts")
 #' @param repo_spec Repository specification, formatted as "user/repo_name"
 #' @param branch Name of the branch to look at
 #' @param host Host URL
@@ -65,9 +67,12 @@ insert_timestamp <- function(tzone = Sys.timezone()) {
 #'
 #' @return A "shiny.tag" object
 #' @export
-insert_lockfile <- function(repo_spec, dir, collection = "_posts",
+insert_lockfile <- function(repo_spec, dir, collection = "posts",
                             branch = "master", host = "https://github.com",
                             text = "R environment") {
+
+  collection <- with_underscore(collection)
+
   path <- paste(
     host, repo_spec, "tree", branch, "_renv", collection, dir,
     "renv.lock", sep = "/"
@@ -78,7 +83,7 @@ insert_lockfile <- function(repo_spec, dir, collection = "_posts",
 #' Inserts a link to the source code
 #'
 #' @param dir The folder in which the article is located
-#' @param collection The collection the article belongs to (default = "_posts")
+#' @param collection The collection the article belongs to (default = "posts")
 #' @param repo_spec Repository specification, formatted as "user/repo_name"
 #' @param branch Name of the branch to look at
 #' @param host Host URL
@@ -86,9 +91,10 @@ insert_lockfile <- function(repo_spec, dir, collection = "_posts",
 #'
 #' @return A "shiny.tag" object
 #' @export
-insert_source <- function(repo_spec, dir, collection = "_posts",
+insert_source <- function(repo_spec, dir, collection = "posts",
                           branch = "master", host = "https://github.com",
                           text = "source code") {
+  collection <- with_underscore(collection)
   path <- paste(
     host, repo_spec, "tree", branch, collection, dir, sep = "/"
   )
@@ -107,6 +113,9 @@ insert_source <- function(repo_spec, dir, collection = "_posts",
 #' @return ???
 #' @export
 insert_netlify_redirect <- function(slug, date, collection = "posts", publish = "_site") {
+
+  # TODO: should ensure that _redirects is an included file in _site.yml or
+  # else distill will not copy it to the output directory
 
   elegant_url <- paste0("/", slug)
   verbose_url <- paste0("/", collection, "/", date, "_", slug)
