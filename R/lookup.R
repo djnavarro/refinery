@@ -37,10 +37,12 @@ article_sitrep <- function(dir, collection = "_posts") {
   )
 
   cli::cli({
-    cli::cli_text("site folder: ", sitrep$site)
-    cli::cli_text("post folder: ", sitrep$post)
-    cli::cli_text("lockfile:    ", sitrep$lockfile)
-    cli::cli_text("library:     ", sitrep$library)
+    cli::cli_ul()
+    cli::cli_li(paste0("site:      ", sitrep$site))
+    cli::cli_li(paste0("post:      ", gsub(sitrep$site, "{{site}}", sitrep$post, fixed = TRUE)))
+    cli::cli_li(paste0("lockfile:  ", gsub(sitrep$site, "{{site}}", sitrep$lockfile, fixed = TRUE)))
+    cli::cli_li(paste0("library:   ", gsub(sitrep$site, "{{site}}", sitrep$library, fixed = TRUE)))
+    cli::cli_end()
   })
 
   return(invisible(sitrep))
