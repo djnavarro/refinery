@@ -6,7 +6,7 @@
 #'
 #' @return Character vector of paths
 #' @export
-article_locate <- function(pattern, collection = "_posts") {
+article_named <- function(pattern, collection = "_posts") {
   list.files(
     path = fs::path(site_root(), collection),
     pattern = pattern,
