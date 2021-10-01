@@ -15,10 +15,16 @@ status](https://www.r-pkg.org/badges/version/refinery)](https://CRAN.R-project.o
 The goal of the refinery package is to provide tools that make it easier
 to blog reproducibly using distill. The central idea is to associate
 every post with a unique R environment, using the renv package to ensure
-that each post is rendered using its associated environment. It is not
-yet on CRAN, and may never be, but if you are foolish enough to try out
-the dev version despite the near-total lack of documentation, unit
-tests, or anything else that you’d expect of a functioning package…
+that each post is rendered using its associated environment. The
+motivation for writing this package is articulated in the blog post
+here:
+
+<https://blog.djnavarro.net/on-blogging-reproducibly>
+
+It is, however, **a work in progress**. It is not yet on CRAN, and may
+never be, but if you are foolish enough to try out the dev version
+despite the near-total lack of documentation, unit tests, or anything
+else that you’d expect of a functioning package…
 
 ``` r
 # install.packages("devtools")
