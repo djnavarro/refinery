@@ -50,8 +50,6 @@ renv_snapshot <- function(name, collection = "posts", type = "implicit", prompt 
 #' @return ???
 #' @export
 renv_restore <- function(name, collection = "posts", clean = FALSE, prompt = FALSE, ...) {
-  renv_set_cache() # <- use hack
-
   post <- specify_post(name, collection)
   renv::restore(
     library = full_library_path(post),
@@ -62,11 +60,9 @@ renv_restore <- function(name, collection = "posts", clean = FALSE, prompt = FAL
   )
 }
 
-# temporary hack!
-renv_set_cache <- function() {
-  Sys.setenv(
-    RENV_PATHS_CACHE = normalizePath("~/.local/share/renv/cache/")
-  )
+# a hack, while I work out why an unexpanded path is being passed to cp
+renv_set_cache <- function(path = "~/.local/share/renv/cache/") {
+  Sys.setenv(RENV_PATHS_CACHE = normalizePath(path))
 }
 
 #' Create a minimal R environment for a post
