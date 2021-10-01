@@ -4,12 +4,12 @@
 \alias{insert_appendix}
 \title{Inserts the default refinery appendix}
 \usage{
-insert_appendix(repo_spec, dir, collection = "posts")
+insert_appendix(repo_spec, name, collection = "posts")
 }
 \arguments{
 \item{repo_spec}{Repository specification, formatted as "user/repo_name"}
 
-\item{dir}{The folder in which the article is located}
+\item{name}{The folder in which the article is located}
 
 \item{collection}{The collection the article belongs to (default = "posts")}
 }

@@ -6,7 +6,7 @@
 \usage{
 insert_lockfile(
   repo_spec,
-  dir,
+  name,
   collection = "posts",
   branch = "master",
   host = "https://github.com",
@@ -16,7 +16,7 @@ insert_lockfile(
 \arguments{
 \item{repo_spec}{Repository specification, formatted as "user/repo_name"}
 
-\item{dir}{The folder in which the article is located}
+\item{name}{The folder in which the article is located}
 
 \item{collection}{The collection the article belongs to (default = "posts")}
 
