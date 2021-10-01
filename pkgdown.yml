@@ -2,7 +2,7 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-10-01T06:01Z
+last_built: 2021-10-01T06:32Z
 urls:
   reference: https://refinery.djnavarro.net/reference
   article: https://refinery.djnavarro.net/articles
