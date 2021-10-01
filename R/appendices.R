@@ -93,7 +93,8 @@ insert_source <- function(repo_spec, name, collection = "posts",
                           branch = "master", host = "https://github.com",
                           text = "source code") {
   path <- paste(
-    host, repo_spec, "tree", branch, paste0("_", collection), name, sep = "/"
+    host, repo_spec, "tree", branch, paste0("_", collection),
+    name, "index.Rmd", sep = "/"
   )
   return(markdown_link(text, path))
 }
